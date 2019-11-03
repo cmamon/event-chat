@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">EventChat</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_list_messages">ListMessagesActivity</string>
+    <string name="title_activity_send_message">SendMessageActivity</string>
+    <string name="send_message">Send Message</string>
+    <string name="show_messages_list">Show messages list</string>
+    <string name="messages_list">Messages list</string>
+    <string name="title_activity_message_detail">MessageDetailActivity</string>
+</resources>
