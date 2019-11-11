@@ -1,6 +1,5 @@
 package com.example.eventchat;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -8,13 +7,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.TextClock;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.wear.widget.WearableRecyclerView;
 import androidx.wear.widget.WearableLinearLayoutManager;
@@ -33,7 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ListMessagesActivity extends WearableActivity
         implements RecyclerViewClickListener, SensorEventListener
@@ -41,8 +39,7 @@ public class ListMessagesActivity extends WearableActivity
     private final String serverURL = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
 
     private WearableRecyclerView mWearableRecyclerView;
-    private TextView mClock;
-    private CountDownTimer mTimer;
+    private TextClock mClock;
 
     private RecyclerView.Adapter mAdapter;
     private ArrayList<Message> mMessages;
@@ -63,11 +60,18 @@ public class ListMessagesActivity extends WearableActivity
         mWearableRecyclerView.setEdgeItemsCenteringEnabled(true);
         mWearableRecyclerView.setAdapter(null);
 
-        CustomScrollingLayoutCallback customScrollingLayoutCallback =
-                new CustomScrollingLayoutCallback();
+//        CustomScrollingLayoutCallback customScrollingLayoutCallback =
+//                new CustomScrollingLayoutCallback();
+//        mWearableRecyclerView.setLayoutManager(
+//                new WearableLinearLayoutManager(this, customScrollingLayoutCallback)
+//        );
         mWearableRecyclerView.setLayoutManager(
-                new WearableLinearLayoutManager(this, customScrollingLayoutCallback)
-        );
+                new WearableLinearLayoutManager(this));
+
+        mClock = findViewById(R.id.clock);
+
+        // Hide clock first
+        mClock.setVisibility(View.INVISIBLE);
 
         mMessages = new ArrayList<>();
 
@@ -86,31 +90,23 @@ public class ListMessagesActivity extends WearableActivity
         super.onEnterAmbient(ambientDetails);
 
         /* Display clock when entering in ambient mode */
+        mClock.setFormat12Hour(null);
+        mClock.setFormat24Hour("HH:mm:ss");
 
-        mTimer = new CountDownTimer(1000000000, 1000) {
+        mWearableRecyclerView.setVisibility(View.INVISIBLE);
+        mClock.setVisibility(View.VISIBLE);
 
-            @SuppressLint("DefaultLocale")
-            public void onTick(long millisUntilFinished) {
-                Calendar c = Calendar.getInstance();
-                mClock.setText(String.format(
-                        "%d:%d:%d",
-                        c.get(Calendar.HOUR),
-                        c.get(Calendar.MINUTE),
-                        c.get(Calendar.SECOND)
-                ));
-            }
-            public void onFinish() {
-
-            }
-        };
-        mTimer.start();
+//        FragmentTransaction fragmentTransaction;
+//        fragmentTransaction.remove();
     }
 
     @Override
     public void onExitAmbient() {
         super.onExitAmbient();
+
         // Stop clock
-        mTimer.cancel();
+        mClock.setVisibility(View.INVISIBLE);
+        mWearableRecyclerView.setVisibility(View.VISIBLE);
 
         /* Update message list*/
         mMessages.clear();
@@ -184,6 +180,12 @@ public class ListMessagesActivity extends WearableActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("LOG", error.toString());
+
+                Toast.makeText(
+                        ListMessagesActivity.this,
+                        "Request error please try again",
+                        Toast.LENGTH_LONG
+                ).show();
             }
         });
 

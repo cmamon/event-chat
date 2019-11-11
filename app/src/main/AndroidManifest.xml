@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".EventChat"
+        android:name=".utils.EventChat"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
         <uses-library
@@ -31,7 +31,7 @@
             android:value="true" />
 
         <activity
-            android:name=".MessageDetailActivity"
+            android:name=".activities.MessageDetailActivity"
             android:label="@string/title_activity_message_detail">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SendMessageActivity"
+            android:name=".activities.SendMessageActivity"
             android:label="@string/title_activity_send_message">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListMessagesActivity"
+            android:name=".activities.MessageListActivity"
             android:label="@string/title_activity_list_messages">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
