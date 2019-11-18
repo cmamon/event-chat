@@ -1,4 +1,4 @@
-package com.example.eventchat;
+package com.example.eventchat.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextClock;
 
+import com.example.eventchat.R;
+
 public class MainActivity extends WearableActivity
 {
     private static final String TAG = MainActivity.class.getName();
-
-    private final String serverURL = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
 
     private Button mBTSendMessage;
     private Button mBTListMessages;
@@ -51,7 +51,7 @@ public class MainActivity extends WearableActivity
         mBTListMessages.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(v.getContext(), ListMessagesActivity.class);
+                        Intent intent = new Intent(v.getContext(), MessageListActivity.class);
                         v.getContext().startActivity(intent);
                     }
 

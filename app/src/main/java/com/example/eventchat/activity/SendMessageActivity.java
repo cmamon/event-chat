@@ -1,4 +1,4 @@
-package com.example.eventchat;
+package com.example.eventchat.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -28,6 +27,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.eventchat.R;
+import com.example.eventchat.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +41,6 @@ public class SendMessageActivity extends WearableActivity implements LocationLis
     private static final String TAG = SendMessageActivity.class.getName();
     private Location mLocation;
     private LocationManager locationManager;
-    private final String serverURL = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class SendMessageActivity extends WearableActivity implements LocationLis
 
             final String requestBody = jsonBody.toString();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, serverURL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SERVER_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

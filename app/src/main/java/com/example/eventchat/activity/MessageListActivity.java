@@ -1,4 +1,4 @@
-package com.example.eventchat;
+package com.example.eventchat.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,8 +25,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.eventchat.R;
 import com.example.eventchat.model.Message;
+import com.example.eventchat.utils.Constants;
 import com.example.eventchat.utils.CustomScrollingLayoutCallback;
+import com.example.eventchat.utils.EventChat;
+import com.example.eventchat.utils.MessageAdapter;
+import com.example.eventchat.utils.RecyclerViewClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,10 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ListMessagesActivity extends WearableActivity
-        implements RecyclerViewClickListener, SensorEventListener
-{
-    private final String serverURL = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
+public class MessageListActivity extends WearableActivity implements RecyclerViewClickListener, SensorEventListener {
 
     private WearableRecyclerView mWearableRecyclerView;
     private TextView mClock;
@@ -149,7 +151,7 @@ public class ListMessagesActivity extends WearableActivity
                 mMessages.clear();
                 getMessages();
 
-                Toast.makeText(ListMessagesActivity.this, "Message list updated",
+                Toast.makeText(MessageListActivity.this, "Message list updated",
                         Toast.LENGTH_LONG).show();
             }
         }
@@ -173,7 +175,7 @@ public class ListMessagesActivity extends WearableActivity
         /* Make HTTP request to get the list of messages form the server */
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, serverURL,
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, Constants.SERVER_URL,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -224,7 +226,7 @@ public class ListMessagesActivity extends WearableActivity
         EventChat app = (EventChat) getApplicationContext();
         app.setMessage(mMessages.get(position));
 
-        Intent intent = new Intent(ListMessagesActivity.this, MessageDetailActivity.class);
+        Intent intent = new Intent(MessageListActivity.this, MessageDetailActivity.class);
         startActivity(intent);
     }
 }

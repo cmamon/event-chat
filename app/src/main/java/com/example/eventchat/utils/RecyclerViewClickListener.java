@@ -1,4 +1,4 @@
-package com.example.eventchat;
+package com.example.eventchat.utils;
 
 import android.view.View;
 

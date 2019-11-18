@@ -1,15 +1,14 @@
-package com.example.eventchat;
+package com.example.eventchat.utils;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.wear.widget.WearableRecyclerView;
 
+import com.example.eventchat.R;
 import com.example.eventchat.model.Message;
 
 import java.util.ArrayList;

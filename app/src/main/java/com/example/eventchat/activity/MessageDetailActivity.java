@@ -1,10 +1,12 @@
-package com.example.eventchat;
+package com.example.eventchat.activity;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.TextView;
 
+import com.example.eventchat.R;
 import com.example.eventchat.model.Message;
+import com.example.eventchat.utils.EventChat;
 
 public class MessageDetailActivity extends WearableActivity {
 

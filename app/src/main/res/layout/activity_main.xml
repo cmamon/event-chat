@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:padding="15dp"
-    tools:context=".MainActivity"
+    tools:context=".activity.MainActivity"
     tools:deviceIds="wear">
 
     <FrameLayout
