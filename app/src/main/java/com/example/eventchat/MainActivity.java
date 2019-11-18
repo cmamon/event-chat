@@ -34,7 +34,7 @@ public class MainActivity extends WearableActivity
     {
         mBTSendMessage =  findViewById(R.id.bt_send_message);
         mBTListMessages = findViewById(R.id.bt_message_list);
-        mClock = findViewById(R.id.clock);
+        mClock = findViewById(R.id.textClock);
 
 
         mClock.setVisibility(View.INVISIBLE);
@@ -65,7 +65,8 @@ public class MainActivity extends WearableActivity
         super.onEnterAmbient(ambientDetails);
 
         mClock.setFormat12Hour(null);
-        mClock.setFormat24Hour("HH:mm:ss");
+        //textClock.setFormat24Hour("dd/MM/yyyy hh:mm:ss a");
+        mClock.setFormat24Hour("hh:mm:ss a EEE MMM d");
 
         mBTSendMessage.setVisibility(View.INVISIBLE);
         mBTListMessages.setVisibility(View.INVISIBLE);
@@ -76,8 +77,8 @@ public class MainActivity extends WearableActivity
     public void onExitAmbient()
     {
         super.onExitAmbient();
-
         // Stop clock
+
         mClock.setVisibility(View.INVISIBLE);
         mBTSendMessage.setVisibility(View.VISIBLE);
         mBTListMessages.setVisibility(View.VISIBLE);
